@@ -1,13 +1,22 @@
-from linearSearch.abstract import Frontier
+
+import sys
+from abc import ABC, abstractmethod
+from collections import deque
+
+sys.path.append("/lesson1/search/linearSearch") 
+from abstract.Frontier import Frontier
 
 
-class StackFrontier(Frontier):
+class QueueFrontier(Frontier):
+
     def __init__(self):
-        self.frontier=[]
+        # Create an empty deque
+        self.frontier=deque()
 
     def add(self,node):
+        # Adds node to the right end
         self.frontier.append(node)
-    
+
     def remove(self):
-        # since we're using stack here, the removal should follow the Last-in First-out rule
-        return self.frontier.pop() 
+        # since we're using Queue here, we follow First-in First-out ruke
+        self.frontier.popleft()

@@ -1,11 +1,8 @@
-import sys
-
-
 class MazeSolver:
     def __init__(self, file_name, frontier):
         self.maze=self.read_maze(file_name) #see implementation below
-        self.start=self.start()
-        self.end=self.end()
+        self.start=self.find_start()
+        self.end=self.find_end()
         self.visited =[[False for _ in row] for row in self.maze]  #initially set all item in vistited as false
         self.path=[]
         self.frontier = frontier()
@@ -73,6 +70,18 @@ class MazeSolver:
         for row in maze_copy:
             print(''.join(row))
 
+    def print_explored_paths(self):
+        maze_copy = [row[:] for row in self.maze]
+        for x in range(len(self.visited)):
+            for y in range(len(self.visited[0])):
+                if self.visited[x][y]:
+                    if (x, y) not in self.path:
+                        maze_copy[x][y] = 'X'
+                    elif maze_copy[x][y] not in ('S', 'E'):
+                        maze_copy[x][y] = '*'
+        for row in maze_copy:
+                print(''.join(row))
+
     def solve(self):
         if not self.start:
             print("Start position 'S' not found in the maze.")
@@ -82,9 +91,10 @@ class MazeSolver:
             print("End position 'E' not found in the maze.")
             return False
 
-        if self.dfs():
+        if self.search():
             print("Path found:")
             self.print_maze_with_path()
+            # self.print_explored_paths()
             return True
         else:
             print("No path found from start to end.")
