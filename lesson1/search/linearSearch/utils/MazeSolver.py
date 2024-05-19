@@ -94,6 +94,8 @@ class MazeSolver:
         if self.search():
             print("Path found:")
             self.print_maze_with_path()
+            print("Number of Paths taken", len(self.path))
+            print("Number of explored paths", len(self.visited))
             # self.print_explored_paths()
             return True
         else:

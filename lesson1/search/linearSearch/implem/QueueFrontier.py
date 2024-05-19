@@ -19,4 +19,4 @@ class QueueFrontier(Frontier):
 
     def remove(self):
         # since we're using Queue here, we follow First-in First-out ruke
-        self.frontier.popleft()
+        return self.frontier.popleft()
