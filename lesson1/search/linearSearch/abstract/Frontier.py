@@ -11,3 +11,6 @@ class Frontier(ABC):
     @abstractmethod
     def remove(self):
         pass
+    @abstractmethod
+    def is_empty(self):
+        pass

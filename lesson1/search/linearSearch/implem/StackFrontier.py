@@ -15,4 +15,6 @@ class StackFrontier(Frontier):
         # since we're using stack here, the removal should follow the Last-in First-out rule
         return self.frontier.pop() 
     
+    def is_empty(self):
+        return not self.frontier
     
