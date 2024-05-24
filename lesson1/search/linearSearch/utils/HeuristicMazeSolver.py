@@ -1,11 +1,13 @@
 class HeuristicMazeSolver:
     def __init__(self, file_name, frontier):
         self.maze = self.read_maze(file_name)
+        # Finds the starting point (marked as 'S') in the maze and stores its coordinates
         self.start = self.find_start()
+        # Finds the ending point (marked as 'E') in the maze and stores its coordinates
         self.end = self.find_end()
-        self.visited = [[False for _ in row] for row in self.maze]
-        self.path = []
-        self.frontier = frontier()
+        self.visited = [[False for _ in row] for row in self.maze] #Initializes a 2D list self.visited to keep track of visited cells in the maze. All cells are initially set to False.
+        self.path = [] #Initializes an empty list self.path to store the path from the start to the end if found.
+        self.frontier = frontier() #Initializes the frontier (a data structure managing nodes to be explored) by calling the provided frontier function.
         self.heuristic = self.manhattan_distance
         
 # in this case, the maze becomes a 2 dimensional array
@@ -31,10 +33,11 @@ class HeuristicMazeSolver:
                 if val == "E":
                     return i, j
         return None
-
+    #Checks if a move to position (x, y) is valid. i.e self.maze[x][y]
     def is_valid_move(self, x, y):
         if x < 0 or x >= len(self.maze) or y < 0 or y >= len(self.maze[0]):
             return False
+        # Ensures the position is within maze bounds, not a wall ('#'), and not already visited.
         if self.maze[x][y] == "#" or self.visited[x][y]:
             return False
         return True
@@ -45,24 +48,24 @@ class HeuristicMazeSolver:
         return abs(x1 - x2) + abs(y1 - y2)
 
     def search(self):
-      
+        # Adds the start node to the frontier with its heuristic value.
         self.frontier.add((self.start, [self.start]), self.heuristic(self.start))
-        explored = set()
-
+        explored = set()#Initializes an empty set explored to keep track of explored nodes.
+        # Continuously explores nodes from the frontier until it's empty:
         while not self.frontier.is_empty():
-            current_pos = self.frontier.remove()
+            current_pos = self.frontier.remove() #Removes a node from the frontier.
             current, path = current_pos
 
             if current in explored:
-                continue
+                continue #Skips the node if already explored.
 
-            explored.add(current)
+            explored.add(current) #Marks the node as explored and visited.
             self.visited[current[0]][current[1]] = True
 
-            if self.maze[current[0]][current[1]] == "E":
+            if self.maze[current[0]][current[1]] == "E": #Checks if the current node is the end; if so, stores the path and returns True.
                 self.path = path
                 return True
-
+            #Generates valid neighboring nodes and adds them to the frontier with their heuristic values.
             for move_x, move_y in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 next_x, next_y = current[0] + move_x, current[1] + move_y
                 if self.is_valid_move(next_x, next_y) and (next_x, next_y) not in explored:
