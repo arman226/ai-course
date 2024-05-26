@@ -4,7 +4,7 @@ import math
 import sys
 
 sys.path.append("lesson1/search/adversarialSearch") 
-from utils import play_game
+from utils import evaluate, is_moves_left, play_game
 
 
 def minimax(board, depth, is_max):

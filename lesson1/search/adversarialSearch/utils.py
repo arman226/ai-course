@@ -1,5 +1,10 @@
+import math
+
+
 def print_board(board):
     """Prints the Tic-Tac-Toe board"""
+
+    print("BOARD")
     for row in board:
         print(" | ".join(row))
         print("-" * 5)
@@ -68,7 +73,7 @@ def find_best_move(board, minimax):
                     best_move = (i, j)
                     best_val = move_val
 
-    return best_move
+    return best_move #this returns a tuple (coordinates)
 
 def play_game(minimax):
     """Main function to play the game"""
