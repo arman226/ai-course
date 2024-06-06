@@ -12,15 +12,15 @@
 
 ### Propositional Symbols
 
-```bash
+```plaintext
 P
 ```
 
-```bash
+```plaintext
 Q
 ```
 
-```bash
+```plaintext
 R
 ```
 
