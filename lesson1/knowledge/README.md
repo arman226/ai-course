@@ -52,3 +52,23 @@ R
 
 7. **NOR** (Negated OR)
    - Symbol: ↓
+
+## OTHER TERMINOLOGIES
+
+### Model
+
+- Assignment of a `truth` value to every propositional symbol (a possible world)
+
+## Knowledge base
+
+- a SET of sentences KNOWN by a knowledge-based agent
+
+## Entailment (⊨)
+
+α ⊨ β
+
+- In every modal in which sentence α is TRUE, sentence β is also TRUE.
+
+## Inference
+
+- process of DERIVING new sentences from old wones
