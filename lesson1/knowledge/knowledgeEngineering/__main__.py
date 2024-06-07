@@ -34,10 +34,30 @@ class ClueGame:
                         if (suspect, weapon, room) not in knowledge and not self.kb[(suspect, weapon, room)]:
                             print(f"{player} deduces that {suspect} did not commit the murder with the {weapon} in the {room}.")
 
-# Example usage:
+# Initialize the game
 game = ClueGame()
+
+# Add clues obtained during the game
 game.add_clue('Miss Scarlett', 'Candlestick', 'Ballroom', 'Player 1')
 game.add_clue('Colonel Mustard', 'Knife', 'Library', 'Player 2')
+game.add_clue('Mrs. White', 'Rope', 'Billiard Room', 'Player 3')
+game.add_clue('Mr. Green', 'Revolver', 'Conservatory', 'Player 4')
+game.add_clue('Mrs. Peacock', 'Wrench', 'Dining Room', 'Player 5')
 
-# Make deductions
+# Make deductions based on the clues
 game.make_deductions()
+
+# Examine remaining possibilities to determine the final answer
+# For example, print the remaining possibilities
+remaining_possibilities = []
+for suspect in game.suspects:
+    for weapon in game.weapons:
+        for room in game.rooms:
+            if not game.kb[(suspect, weapon, room)]:
+                remaining_possibilities.append((suspect, weapon, room))
+
+if len(remaining_possibilities) == 1:
+    final_answer = remaining_possibilities[0]
+    print("Final Answer:", final_answer)
+else:
+    print(f"Multiple possibilities remain. Further deductions needed.{len(remaining_possibilities)}")
